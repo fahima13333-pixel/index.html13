@@ -1,1 +1,51 @@
-
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#145c52"><title>English Island</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#dff5ec,#fffaf0);color:#173b37}.wrap{max-width:700px;margin:auto;padding:14px}header,.card{border-radius:22px;padding:18px;margin-bottom:14px}header{background:#145c52;color:white;text-align:center;box-shadow:0 6px #0d453d}.logo{font-size:32px;font-weight:900;direction:ltr}.island{font-size:34px;margin-top:10px}.card{background:white;border:2px solid #d7eae1;box-shadow:0 4px #d6e7dc}h2{margin-top:0}p{line-height:1.65}button,input{font:inherit}button{border:0;border-radius:14px;padding:14px;font-weight:bold;cursor:pointer}.field{width:100%;padding:14px;border:2px solid #cbded5;border-radius:13px;margin:8px 0 15px}.row{display:flex;gap:9px;flex-wrap:wrap}.choice{flex:1;min-width:110px;background:#f1f8f4;border:2px solid #cfe4d8;color:#173b37}.selected{background:#d9f1e5;border-color:#145c52}.primary{background:#145c52;color:white;width:100%;margin-top:12px;font-size:18px}.secondary{background:#eef5f1;color:#145c52;width:100%;margin-top:10px}.hidden{display:none!important}.top{display:flex;justify-content:space-between;gap:8px;margin-bottom:12px}.pill{background:#e5f5ee;padding:8px 11px;border-radius:30px;font-weight:bold}.progress{height:8px;background:#e5eee9;border-radius:30px;overflow:hidden;margin:12px 0}.bar{height:100%;background:#e8ac35;width:0}.question{font-size:23px;font-weight:bold;text-align:center;line-height:1.5;margin:18px 0}.answers{display:grid;gap:10px}.answer{background:#f4f8ff;border:2px solid #d6e4f6;font-size:18px;min-height:54px;direction:ltr;color:#183e52}.correct{background:#dff6e8!important;border-color:#309365!important}.wrong{background:#ffe5e5!important;border-color:#d66b6b!important}.feedback{padding:12px;border-radius:14px;background:#fff4ce;line-height:1.7;margin-top:12px}.small{font-size:13px;color:#52706a}.foot{text-align:center;font-size:12px;color:#55716b;padding:10px}@media(min-width:540px){.answers{grid-template-columns:1fr 1fr}}
+</style></head><body><main class="wrap">
+<header><div class="logo">🏝️ English Island</div><div>Learn a little. Grow every day! · تعلّم قليلًا كل يوم</div><div class="island">🌴 📚 🐢 🌴</div></header>
+<section class="card" id="welcome"><h2>أهلًا بك في جزيرة الإنجليزية! 🌟</h2><p>لعبة تعليمية بسيطة للأطفال لتعلّم كلمات وجمل إنجليزية من خلال أسئلة قصيرة.</p><label for="student"><b>اسم الطالب أو الطالبة (اختياري)</b></label><input class="field" id="student" maxlength="24" placeholder="اكتبي الاسم الأول فقط"><h3>اختاري الصف</h3><div class="row" id="grades"><button class="choice selected" data-g="2">الصف الثاني</button><button class="choice" data-g="3">الصف الثالث</button><button class="choice" data-g="4">الصف الرابع</button></div><h3 style="margin-top:18px">اختاري رفيق الرحلة</h3><div class="row" id="chars"><button class="choice selected" data-c="Nasser">👦 ناصر</button><button class="choice" data-c="Renad">👧🏻 رناد</button></div><button class="primary" id="start">ابدئي الرحلة 🚀</button><p class="small">لا تكتبي معلومات خاصة. يمكن اللعب دون الاسم.</p></section>
+<section class="card hidden" id="game"><div class="top"><span class="pill" id="hello"></span><span class="pill" id="score">⭐ 0</span></div><div class="top"><span id="gradeLabel">الصف الثاني</span><span class="small" id="count"></span></div><div class="progress"><div class="bar" id="bar"></div></div><div class="question" id="question"></div><div class="answers" id="answers"></div><div class="feedback hidden" id="feedback" aria-live="polite"></div><button class="primary hidden" id="next">السؤال التالي</button><button class="secondary" id="home">العودة للبداية</button></section>
+<section class="card hidden" id="finish"><h2>أحسنت! 🎉</h2><p id="result"></p><div style="text-align:center;font-size:42px">🏆 ⭐ 🌈</div><p>الخطأ فرصة للتعلّم. جرّب مرة أخرى وستتحسن مع التدريب.</p><button class="primary" id="again">العب مرة أخرى</button><button class="secondary" id="home2">العودة للبداية</button></section><div class="foot">English Island · نسخة تعليمية تجريبية</div></main>
+<script>
+const bank={
+2:[
+["What is this? 🚗",["A car","A book","A fish"],0,"A car = سيارة."],
+["Where is the pencil? (على الطاولة)",["Under the table","On the table","In the bag"],1,"On = على."],
+["I am … 😊",["happy","blue","run"],0,"Happy = سعيد أو سعيدة."],
+["This is my … 📘",["book","jump","happy"],0,"Book = كتاب."],
+["Which one is a family member?",["Mother","Window","Pencil"],0,"Mother = أم."],
+["Choose a morning greeting:",["Good morning!","Goodbye forever!","Good night!"],0,"Good morning تُقال في الصباح."],
+["Which body part helps us hear? 👂",["Ears","Eyes","Hands"],0,"Ears = آذان."],
+["Complete: I ___ football.",["play","plays","playing"],0,"نقول: I play football."]
+],
+3:[
+["Choose the correct sentence:",["She go to school.","She goes to school.","She going school."],1,"مع she نضيف غالبًا s للفعل: goes."],
+["What is a hobby? 🎾",["Play tennis","A hospital","A sandwich"],0,"Play tennis = يلعب التنس."],
+["I ___ watch TV. (أبدًا)",["never","always","often"],0,"Never = أبدًا."],
+["What is this? 🧢",["A cap","A coat","A shoe"],0,"Cap = قبعة."],
+["I want to be a … 🩺",["doctor","Monday","blue"],0,"Doctor = طبيب أو طبيبة."],
+["Choose the correct sentence:",["They are wearing jeans.","They is wearing jeans.","They wearing jeans."],0,"They are wearing = هم يرتدون."],
+["Which is a polite phone phrase?",["Hello, this is Ali.","Give it now!","Go away!"],0,"هذه طريقة مهذبة لبدء مكالمة."],
+["Complete: He ___ basketball.",["plays","play","playing"],0,"مع he نستخدم plays."]
+],
+4:[
+["Where are you from?",["I’m from Oman.","I’m ten apples.","I’m a mountain."],0,"I’m from Oman = أنا من عُمان."],
+["There ___ some apples.",["are","is","am"],0,"Apples جمع؛ نستخدم There are."],
+["Choose the correct question:",["Are there any eggs?","Is there any eggs?","There are eggs?"],0,"مع الجمع نستخدم Are there…?"],
+["Which is a landscape? 🏞️",["Mountain","Nurse","Sandwich"],0,"Mountain = جبل."],
+["Choose the correct sentence:",["Jabal Shams is high.","Jabal Shams is the highest mountain in Oman.","Jabal Shams are highest."],1,"Jabal Shams is the highest mountain in Oman."],
+["You ___ drop litter.",["mustn’t","should","are"],0,"Mustn’t = يجب ألا."],
+["If you feel ill, you should …",["rest","run all day","ignore it always"],0,"Should rest = ينبغي أن ترتاح."],
+["He ___ cooking now.",["is","are","do"],0,"He is cooking = هو يطبخ الآن."]
+]};
+let grade=2,character="Nasser",idx=0,score=0,items=[],locked=false;
+const $=id=>document.getElementById(id);
+function show(id){["welcome","game","finish"].forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo(0,0)}
+function choose(container,attr,apply){$(container).addEventListener("click",e=>{let b=e.target.closest("button["+attr+"]");if(!b)return;apply(b);$(container).querySelectorAll("button").forEach(x=>x.classList.toggle("selected",x===b))})}
+choose("grades","data-g",b=>grade=+b.dataset.g);choose("chars","data-c",b=>character=b.dataset.c);
+function start(){idx=0;score=0;items=[...bank[grade]].sort(()=>Math.random()-.5);$("hello").textContent=(character==="Nasser"?"👦 ناصر: ":"👧🏻 رناد: ")+($("student").value.trim()?"أهلًا يا "+$("student").value.trim()+"! هيا نتعلم.":"أهلًا بك! هيا نتعلم.");$("score").textContent="⭐ 0";$("gradeLabel").textContent="الصف "+({2:"الثاني",3:"الثالث",4:"الرابع"}[grade]);show("game");render()}
+function render(){locked=false;let q=items[idx];$("count").textContent=`السؤال ${idx+1} من ${items.length}`;$("bar").style.width=(idx/items.length*100)+"%";$("question").textContent=q[0];$("answers").innerHTML="";$("feedback").classList.add("hidden");$("next").classList.add("hidden");q[1].forEach((a,i)=>{let b=document.createElement("button");b.className="answer";b.textContent=a;b.onclick=()=>answer(i,b);$("answers").appendChild(b)})}
+function answer(n,btn){if(locked)return;locked=true;let q=items[idx],ok=n===q[2];[...$("answers").children].forEach((b,i)=>{b.disabled=true;if(i===q[2])b.classList.add("correct")});if(!ok)btn.classList.add("wrong");if(ok)score++;$("score").textContent="⭐ "+score;$("feedback").textContent=(ok?"أحسنت! إجابة صحيحة 🌟 ":"لا بأس، لنتعلم معًا. الإجابة الصحيحة: "+q[1][q[2]]+". ")+q[3];$("feedback").classList.remove("hidden");$("bar").style.width=((idx+1)/items.length*100)+"%";$("next").textContent=idx===items.length-1?"عرض النتيجة 🏆":"السؤال التالي ←";$("next").classList.remove("hidden")}
+$("start").onclick=start;$("next").onclick=()=>{if(idx<items.length-1){idx++;render()}else{$("result").textContent=($("student").value.trim()||"يا بطل")+`، أجبت عن ${score} من ${items.length} أسئلة بشكل صحيح. `+(score>=6?"عمل رائع!":"واصل التدريب وستتقدم أكثر!");show("finish")}};$("home").onclick=$("home2").onclick=()=>show("welcome");$("again").onclick=start;
+</script></body></html>
